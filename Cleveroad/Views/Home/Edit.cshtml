@@ -1,0 +1,98 @@
+﻿@model Cleveroad.Models.Order
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div>
+        <h3>Order editing</h3>
+        <div>
+            @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+            {
+                object viewmode;
+                if (Session["Order"].ToString() == "Old")
+                {
+                    viewmode = (object)new { @disabled = "disabled" };
+                }
+                else
+                {
+                    viewmode = (object)new { };
+                }
+                @:<div class="main">
+    {
+                    if ((Session["Order"]).ToString() == "New")
+                    {
+                        @:<div class="hidden field">
+        }
+                    else
+                    {
+                        @:<div class="field">
+        }
+                    @Html.LabelFor(m => m.Id, "Order ID")
+                    @Html.TextBoxFor(model => model.Id, viewmode)
+                    if ((Session["Order"]).ToString() == "New")
+                    {
+                        @:</div>
+                    }
+                    else
+                    { 
+                        @:</div>
+                    }
+                }
+                <br />
+
+
+                SelectList listData = new SelectList(ViewBag.CustomersSelectList, "Value", "Text");
+                @:<div class="field">
+                    @Html.LabelFor(m => m.Customer.Id, "Customer ID")
+                if (Session["Order"].ToString() == "Old")
+                {
+                    @Html.DropDownList("CustomerId", listData, viewmode)
+                    @Html.Hidden("CustomerId")
+                }
+                else
+                {
+                    @Html.DropDownList("CustomerId", listData, viewmode)
+                }
+                @:</div>
+            <br />
+
+            <div class="field">
+                @Html.LabelFor(m => m.OrderDate, "Date")
+                @Html.TextBoxFor(model => model.OrderDate, "{0:dd'/'MM'/'yyyy}", viewmode)
+            </div>
+            <br />
+            <div class="field">
+                @Html.LabelFor(m => m.OrderData, "Order data")
+                @Html.EditorFor(model => model.OrderData)
+            </div>
+            <br />
+            <div class="field">
+                @Html.LabelFor(m => m.OrderRoundedWeight, "Rounded weight")
+                @Html.EditorFor(model => model.OrderRoundedWeight)
+            </div>
+            <br />
+            <div class="field">
+                <input type="submit" value="Save" />
+                <input type="button" value="Cancel" onClick='location.href="/Home"'>
+            </div>
+            @:</div>
+            }
+        </div>
+</div>
+
+
+<script type="text/javascript">
+	jQuery(function ($) {
+		$("#OrderRoundedWeight").mask("999");
+		});
+</script>
+
+</body>
+</html>

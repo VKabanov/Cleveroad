@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Cleveroad.Models.Order>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div>
+        <h3>Orders list</h3>  
+        <table id="OrdersTable">
+            <thead>
+                <tr>
+                    <td><p>order #</p></td>
+                    <td><p>Date</p></td>
+                    <td><p>Customer</p></td>
+                    <td><p>Order data</p></td>
+                    <td><p>Weigth (rounded)</p></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+          
+            </tbody>
+        </table>
+        <p><a class="add" href="/Home/Add">Create new Order</a></p>
+    </div>
+    
+    <script type="text/javascript">
+        {
+$(document).ready(function() {
+    $('#OrdersTable').DataTable( {
+        "processing": true,
+        "ajax": {
+            "url": "/Home/GetOrdersData/",
+            "type": "GET"
+        },
+        "columns": [
+                      { data: [0]},                     
+                      { data: [1]},
+                      { data: [2]},
+                      { data: [3]},
+                      { data: [4]},
+                      { data: "Edit", render: function (data, type, row) { return ('<a id="edit" href="/Home/Edit/' +row[0] + '">Edit</a>')  }, bSortable: false },
+                      { data: "Remove", render: function (data, type, row) { return ('<a id="'+row[0]+'" class="remove" href="/Home/Remove/' + row[0] + '">Remove</a>') }, bSortable: false }
+        ]
+    });
+
+    $('#OrdersTable').dataTable();
+    $('#OrdersTable').on('click', 'a.remove', OnDeleteClick);
+} );
+
+             }
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+E:\temp\iHandover\iHandover\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\temp\iHandover\iHandover\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\temp\iHandover\iHandover\bin\roslyn\System.Collections.Immutable.dll
+E:\temp\iHandover\iHandover\bin\roslyn\System.Reflection.Metadata.dll
+E:\temp\iHandover\iHandover\bin\roslyn\VBCSCompiler.exe
